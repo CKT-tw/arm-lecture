@@ -21,7 +21,7 @@ fibonacci:
 	@ Compare R4 wtih 1
 	@ If R4 == 1 goto .L4 (which returns 1)
 	cmp r4,#1
-	beq .L4
+	beq .END
 
 	@ R0 = R4 - 1
 	@ Recursive call to fibonacci with R4 - 1 as parameter
@@ -37,6 +37,8 @@ fibonacci:
 
 	@ R0 = R5 + R0 (update flags)
 	adds r0,r4,#2
+
+.END
 	pop { r4, r5, pc}		@EPILOG
 	
 
@@ -45,9 +47,6 @@ fibonacci:
 	mov r0, #0			@ R0 = 0
 	pop { r4, r5, pc}		@ EPILOG
 
-.L4:
-	mov r0, #1			@ R0 = 1
-	pop { r4, r5, pc}		@ EPILOG
 
 	.size fibonacci, .-fibonacci
 	.end
